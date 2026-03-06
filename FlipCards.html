@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asimetrix - Argumentos de Venta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face { font-family: 'SF Pro Display'; src: url('AX_Tipografía/SF-Pro-Display-Regular.otf') format('opentype'); font-weight: 400; }
+        @font-face { font-family: 'SF Pro Display'; src: url('AX_Tipografía/SF-Pro-Display-Medium.otf') format('opentype'); font-weight: 500; }
+        @font-face { font-family: 'SF Pro Display'; src: url('AX_Tipografía/SF-Pro-Display-Semibold.otf') format('opentype'); font-weight: 600; }
+        @font-face { font-family: 'SF Pro Display'; src: url('AX_Tipografía/SF-Pro-Display-Bold.otf') format('opentype'); font-weight: 700; }
+        @font-face { font-family: 'SF Pro Text'; src: url('AX_Tipografía/SF-Pro-Text-Regular.otf') format('opentype'); font-weight: 400; }
+        @font-face { font-family: 'SF Pro Text'; src: url('AX_Tipografía/SF-Pro-Text-Medium.otf') format('opentype'); font-weight: 500; }
+        * { box-sizing: border-box; }
+        body { background: linear-gradient(135deg, #040833 0%, #005980 100%); min-height: 100vh; font-family: 'SF Pro Text', -apple-system, sans-serif; }
+        .font-heading { font-family: 'SF Pro Display', sans-serif; }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .flip-card.flipped .card-inner { transform: rotateY(180deg); }
+        .card-inner { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .flip-card:hover .card-inner { transform: translateY(-8px); }
+        .flip-card.flipped:hover .card-inner { transform: rotateY(180deg) translateY(-8px); }
+        .card-glow { box-shadow: 0 0 40px rgba(151, 244, 255, 0.1); }
+        .card-front { background: linear-gradient(145deg, #040939 0%, #02315D 100%); border: 1px solid rgba(151, 244, 255, 0.2); }
+        .card-back { background: linear-gradient(145deg, #02315D 0%, #040939 50%, #97F4FF 100%); border: 1px solid rgba(151, 244, 255, 0.3); }
+        .category-btn.active { background: #97F4FF; color: #040833; }
+        .glass { background: rgba(4, 8, 57, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(151, 244, 255, 0.1); }
+    </style>
+</head>
+<body class="bg-[#040833] min-h-screen">
+    <header class="py-6 px-6 glass">
+        <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 flex items-center justify-center">
+                    <img src="AX_Iconos/Vector.svg" alt="Asimetrix" class="w-10 h-10">
+                </div>
+                <div>
+                    <h1 class="text-white font-heading font-bold text-2xl">Asimetrix</h1>
+                    <p class="text-[#97F4FF]/70 text-sm">Argumentos de venta</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="decir-no-decir.html" class="px-4 py-2 rounded-full glass text-white text-sm hover:bg-[#97F4FF] hover:text-[#040833] transition-all">
+                    Qué decir y qué no decir →
+                </a>
+                <div class="flex items-center gap-3 glass px-4 py-2 rounded-full">
+                    <span class="text-[#97F4FF] font-semibold" id="viewed-count">0</span>
+                    <span class="text-[#97F4FF]/50">/</span>
+                    <span class="text-white" id="total-count">0</span>
+                    <span class="text-[#97F4FF]/70 text-sm ml-1">tarjetas</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+        <div class="mb-8">
+            <div class="flex flex-wrap gap-3 mb-4" id="category-filters">
+                <button class="category-btn active px-5 py-2 rounded-full bg-[#97F4FF] text-[#040833] font-semibold text-sm transition-all" data-category="all">Todas</button>
+                <button class="category-btn px-5 py-2 rounded-full glass text-white font-medium text-sm hover:bg-[#97F4FF] hover:text-[#040833] transition-all" data-category="pigvision">PigVision</button>
+                <button class="category-btn px-5 py-2 rounded-full glass text-white font-medium text-sm hover:bg-[#97F4FF] hover:text-[#040833] transition-all" data-category="insylo">Insylo</button>
+                <button class="category-btn px-5 py-2 rounded-full glass text-white font-medium text-sm hover:bg-[#97F4FF] hover:text-[#040833] transition-all" data-category="nodos">Nodos</button>
+                <button class="category-btn px-5 py-2 rounded-full glass text-white font-medium text-sm hover:bg-[#97F4FF] hover:text-[#040833] transition-all" data-category="plataforma">Plataforma</button>
+                <button class="category-btn px-5 py-2 rounded-full glass text-white font-medium text-sm hover:bg-[#97F4FF] hover:text-[#040833] transition-all" data-category="general">General</button>
+            </div>
+            <div class="relative max-w-md">
+                <input type="text" id="search-input" placeholder="Buscar por palabras clave..." class="w-full px-4 py-3 pl-12 rounded-xl glass text-white placeholder-[#97F4FF]/50 focus:outline-none focus:ring-2 focus:ring-[#97F4FF]">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#97F4FF]/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="cards-container"></div>
+    </main>
+
+    <footer class="py-8 px-6 glass mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-[#97F4FF]/50 text-sm">Asimetrix © 2026 - Herramienta de ventas interna</p>
+        </div>
+    </footer>
+
+    <script>
+        const cardsData = [
+            { id: 1, category: "pigvision", usuario: "galponero", question: "Yo ya sé cuánto pesan mis cerdos, no necesito una cámara para eso.", answer: "Mire, yo no vengo a decirle que usted no sabe pesar. Usted lleva años en esto y conoce sus cerdos como la palma de su mano. Lo que pasa es que a veces uno tiene la corazonada de que un lote está bajito, pero no tiene cómo probarlo. Con la cámara usted puede decir: 'mire, mis cerdos están pesando 62 kilos cuando deberían estar en 70'. Eso no es para reemplazar su ojo, es para que cuando usted diga 'algo no anda bien', tenga el respaldo." },
+            { id: 2, category: "pigvision", usuario: "galponero", question: "Es que eso de configurar me queda lejos, soy malo con la tecnología.", answer: "Imagínese el celular desde que lo tuvo. Al principio le dio guerra, ¿verdad? Y ahora lo maneja mejor que cualquiera. Con PigVision pasa igual: se configura una vez y ya. Si tiene dudas, nosotros lo acompañamos. Y además, la cámara le dice si está bien instalada o no." },
+            { id: 3, category: "pigvision", usuario: "galponero", question: "¿Y si se me dañó la cámara? ¿Qué hago? Yo no entiendo de esas cosas.", answer: "Tiene un año de garantía. Y si se daña, lo cambiamos sin costo. Es un equipo muy sencillo, no tiene muchas piezas quefallen. Y además, aunque se dañe, usted tiene un repuesto, ¿no? No se queda sin opción." },
+            { id: 4, category: "pigvision", usuario: "galponero", question: "Mi patrón me va a decir que para qué quiero eso si siempre hemos pesado a ojo.", answer: "Le voy a contar algo: en una granja de Córdoba, el galponero le propuso al dueño probar la cámara. El dueño dijo lo mismo que usted: 'para qué'. Pero el galponero le mostró que podía saber el peso sin meter los cerdos a la báscula y sin estresarlos. El dueño terminó diciendo: '¿por qué no trajimos esto antes?'." },
+            { id: 5, category: "pigvision", usuario: "galponero", question: "Suena complicado, mejor lo que hacíamos antes.", answer: "Yo le explico en dos minutos: la cámara se cuelga, se enchufa, se conecta al wifi y ya está. No tiene que hacer nada más. Ella sola pesa y le muestra los datos en su celular. Listo." },
+            { id: 6, category: "pigvision", usuario: "tecnico", question: "Ya tengo suficiente con mantener los otros equipos, no necesito otra cosa que falle.", answer: "Le entiendo. La diferencia con PigVision es que se configura una vez y después usted casi no tiene que tocarla. Ella sola está ahí, pesando, mandando datos. No es un equipo más que mantener, es uno menos en el que tiene que estar pendiente." },
+            { id: 7, category: "pigvision", usuario: "tecnico", question: "Es que los datos no son confiables. Una vez trajimos un sistema y los números estaban mal.", answer: "Le voy a ser honesto: nada es perfecto. Pero le cuento: en una granja en Antioquia hicieron una prueba: pesaron 100 cerdos en la báscula y compararon con lo que marcaba la cámara. Estaban a menos de dos kilos de diferencia. Para efectos de manejar un lote, esa precisión alcanza y sobra." },
+            { id: 8, category: "pigvision", usuario: "tecnico", question: "¿Y cómo se integra con lo que ya tengo?", answer: "Tenemos API, así que si su granja ya tiene un sistema, podemos conectarlo. Y si no tiene nada, el panel de PigVision ya le sirve. Es como tener todo en un solo lugar." },
+            { id: 9, category: "pigvision", usuario: "tecnico", question: "No tengo tiempo para configurar una cosa nueva.", answer: "Entiendo que el tiempo es lo que menos le sobra. Pero piénselo así: ¿cuánto tiempo invierte al día en pesar, en anotar, en hacer cuentas? Con PigVision eso se reduce a casi cero. Usted llega, abre el celular y ya tiene los números." },
+            { id: 10, category: "pigvision", usuario: "dueno", question: "Suena interesante, pero no tengo tiempo de aprender algo nuevo.", answer: "Mire, yo entiendo. Usted tiene mil cosas en la cabeza y lo último que quiere es aprender un programa nuevo. Le cuento cómo funciona: usted no tiene que aprender nada. Sus galponerosinstalan la cámara, usted abre su celular y ya." },
+            { id: 11, category: "pigvision", usuario: "dueno", question: "¿Y cuánto cuesta? Porque siempre son caros estos aparatitos.", answer: "Depende del tamaño de la granja. Pero le digo honesto: la cámara se paga sola en el primer lote. ¿Sabe cómo? Porque usted deja de perder plata pesando mal. Si tiene 500 cerdos y no sabe si pesan 70 u 80 kilos, eso es una diferencia enorme en plata." },
+            { id: 12, category: "pigvision", usuario: "dueno", question: "Mis galponeros no van a saber usarla.", answer: "Se lo cuento como experiencia: en una granja en el Valle, el dueño pensaba igual. Los galponeros eran todos mayores, ninguno con tecnología. Les dio la cámara y en dos días estaban revendola. Son más fáciles de usar que un celular." },
+            { id: 13, category: "pigvision", usuario: "dueno", question: "Llevo 20 años pesando a ojo y me ha ido bien.", answer: "Y está muy bien, no lo cuestiono. Lo que pasa es que el ojo funciona hasta cierto punto. Cuando tiene 50 cerdos los conoce a todos, pero cuando tiene 500 ya no. La cámara le da visibilidad de lo que no puede ver." },
+            { id: 14, category: "pigvision", usuario: "dueno", question: "Necesito ver que esto realmente funciona antes de meter plata.", answer: "Perfecto, totalmente entiendo. Podemos hacer una prueba en un galpón, con un lote, para que vea los resultados. Sin compromiso. Si no le sirve, no sigue. Pero si le sirve, va a preguntarse por qué no lo tuvo antes." },
+            { id: 15, category: "pigvision", usuario: "hijo", question: "Mi papá dice que eso es plata tirada.", answer: "Yo entiendo. Pero piénselo así: si usted pone la cámara y puede mostrarle: 'mire, tenemos 200 cerdos que deberían pesar 80 y están en 65', ¿qué le dice? Eso no es opinión, son números. Y los números no se discuten." },
+            { id: 16, category: "pigvision", usuario: "hijo", question: "Es que siempre hemos hecho las cosas así y funciona.", answer: "Y está bien, funcionó hasta ahora. Pero el mercado cambia, la competencia cambia. Las granjas que van a durar son las que se adaptan. No se trata de cambiar todo, se trata de tener herramientas que le ayuden a tomar mejores decisiones." },
+            { id: 17, category: "pigvision", usuario: "hijo", question: "No quiero estar pendiente de una cosa más.", answer: "Y no tiene que estar pendiente. La cámara hace su trabajo sola. Lo único que tiene que hacer es abrir el celular y ver los números. Como cuando revisa el clima. No le quita tiempo, se lo gana." },
+            { id: 18, category: "pigvision", usuario: "hijo", question: "¿Y si lo pongo y no funciona? Me van a culpar a mí.", answer: "Mire, entiendo su preocupación. Pero piénselo: si usted propone algo y funciona, queda bien. Si propone algo y no funciona, aprende. Y además, podemos hacer una prueba pequeña primero, en un solo galpón. Sin arriesgar todo." },
+            { id: 19, category: "pigvision", usuario: "lider", question: "¿Cómo sé que esto realmente genera retorno?", answer: "Le pongo un ejemplo fácil: ¿cuántos cerdos tiene? ¿Cuánto le cuesta alimentarlos? Si usted no sabe exactamente cuánto pesan, puede estar alimentando cerdos que ya deberían haber salido. Cada semana de más es plata perdida en comida." },
+            { id: 20, category: "pigvision", usuario: "lider", question: "Ya invierto en muchas cosas, ¿por qué una cámara más?", answer: "No es una cámara más, es una herramienta que le da información. Y con información correcta, las decisiones son mejores. Piénselo: si usted tiene un lote de 500 cerdos y no sabe exactamente cuántos pesan, ¿cómo sabe cuándo vender? Está adivinando." },
+            { id: 21, category: "pigvision", usuario: "lider", question: "Necesito ver integración con mis sistemas.", answer: "Tenemos API, así que podemos conectarlo a lo que ya tiene. Y si no tiene sistema, el panel de PigVision ya le sirve. Le da reportes, gráficos, lo que necesite para sus presentaciones." },
+            { id: 22, category: "insylo", usuario: "galponero", question: "Yo siempre sé cuándo va a hacer falta, no necesito una máquina.", answer: "Y seguro que sí, usted conoce sus silos mejor que nadie. Lo que pasa es que a veces uno calcula y resulta que el concentrado duraba menos de lo que pensaba. Con Insylo usted tiene la fecha exacta de cuándo tiene que pedir." },
+            { id: 23, category: "insylo", usuario: "galponero", question: "Es que subirse al silo es peligroso, pero ya estoy acostumbrado.", answer: "Exacto, y eso es precisamente lo que queremos evitarle. ¿Cuántas veces se ha subido con la escalera, arriesgándose, solo para ver cuánto queda? Con Insylo se acaba eso. Desde el celular mira y ya sabe." },
+            { id: 24, category: "insylo", usuario: "galponero", question: "¿Y si se va la luz o el internet?", answer: "Buena pregunta. El sistema funciona con pilas, así que aunque se vaya la luz, sigue funcionando. Y no necesita internet para medir, los datos se guardan y se mandan cuando vuelva la conexión." },
+            { id: 25, category: "insylo", usuario: "galponero", question: "Nadie me ha pedido eso, para qué lo voy a tener.", answer: "Es que es algo nuevo. Pero piénselo: si usted le puede decir a su jefe 'el alimento llega el jueves' con certeza, en lugar de 'creo que dura hasta la semana que viene', ¿quién no va a querer eso?" },
+            { id: 26, category: "insylo", usuario: "tecnico", question: "Yo tengo un Excel con las fechas, me funciona.", answer: "El Excel está muy bien. Lo que pasa es que con Insylo tiene los datos en tiempo real. No tiene que actualizarlo, no tiene que acordarse de revisar. El sistema le dice exactamente cuánto hay y cuándo va a terminar." },
+            { id: 27, category: "insylo", usuario: "tecnico", question: "Es que el problema no es saber cuánto hay, el problema es que no me hacen caso cuando digo que hay que pedir.", answer: "Y esa es la clave. Si usted tiene los datos en el celular y puede mostrar: 'mire, el silo está en 15%, tiene que pedir', es más difícil que le digan que no. Con números claros, las decisiones se toman diferente." },
+            { id: 28, category: "insylo", usuario: "tecnico", question: "¿Y cómo se entera el proveedor?", answer: "El sistema le puede mandar la alerta a usted, al proveedor, a quien usted quiera. Podemos configurar que le llegue directo al que hace los pedidos." },
+            { id: 29, category: "insylo", usuario: "dueno", question: "El alimento es mi gasto más grande, pero siempre ha funcionado así.", answer: "Y está bien, funcionó. Pero piénselo: si usted pudiera pedir el alimento con una semana de anticipación en lugar de tres días, ¿cuánto ahorraría en flete? El sensor se paga solo en eso." },
+            { id: 30, category: "insylo", usuario: "dueno", question: "Si mis empleados me dicen que falta, pido. No necesito un sensor.", answer: "Mire, sus empleados hacen su trabajo. Pero a veces se olvida, a veces no cuentan bien, a veces hay rotación. El sensor no se olvida, no se distrae. Le da la información exacta, siempre." },
+            { id: 31, category: "insylo", usuario: "dueno", question: "¿Y el sensor se daña? Porque eso es plata perdida.", answer: "Tiene un año de garantía. Y si se daña, lo cambiamos sin costo. Es un equipo muy sencillo, no tiene muchas piezas quefallen." },
+            { id: 32, category: "insylo", usuario: "hijo", question: "Yo no estoy en eso, mi papá lo maneja.", answer: "Y está bien, él sabe. Pero si usted puede mostrarle: 'mire, en los últimos tres meses gastamos X en concentrado y podríamos haber gastado menos si pedíamos diferente', eso es demostrar que puede aportar." },
+            { id: 33, category: "insylo", usuario: "hijo", question: "¿Para qué quiero saber del alimento si no soy yo quien compra?", answer: "El alimento es el 70% del costo de la granja. Si usted sabe exactamente cuánto entra y cuánto sale de ahí, puede proponer mejoras. Y proponer mejoras es como se demuestra que puede manejar el negocio." },
+            { id: 34, category: "insylo", usuario: "lider", question: "El alimento fluctúa mucho, es difícil presupuestar.", answer: "Exacto. Por eso mismo sirve el sensor. Si usted tiene los datos de consumo de los últimos seis meses, puede proyectar con certeza. No es lo mismo decir 'creo que vamos a necesitar' que 'vamos a necesitar 50 toneladas en marzo'." },
+            { id: 35, category: "insylo", usuario: "lider", question: "¿Cómo me aseguro de que el sensor sea preciso?", answer: "El sensor tiene más del 99% de precisión. Y lo puede verificar: baje, mire el nivel real y compare con lo que le marca el sistema." },
+            { id: 36, category: "insylo", usuario: "lider", question: "¿Tienen algo que se integre con mi sistema contable?", answer: "Tenemos API, así que podemos conectarlo. Y si no tiene sistema, el panel de Insylo le da los reportes que necesita." },
+            { id: 37, category: "nodos", usuario: "galponero", question: "Yo siento cuando hace calor o frío, no necesito un sensor.", answer: "Y seguro que sí, usted conoce sus cerdos. Lo que pasa es que a veces el problema no se siente: el amoníaco no tiene olor fuerte, la humedad no se ve. Hay cosas que uno no percibe y que afectan a los animales." },
+            { id: 38, category: "nodos", usuario: "galponero", question: "Los cerdos me dicen si están incómodos.", answer: "Los cerdos son muy buenos indicadores, pero hay cosas que pasan antes de que ellos muestren. El sensor le avisa antes, no después. Es como la diferencia entre sentir dolor de cabeza y tomarse la temperatura." },
+            { id: 39, category: "nodos", usuario: "galponero", question: "Es que eso ya lo reviso yo.", answer: "Y está bien, no lo cuestiono. Pero cuando está en el galpón tres, ¿qué pasa con el uno? Los sensores están ahí todo el tiempo, día y noche. Si algo cambia a las 3 de la mañana, usted no lo ve, pero el sensor sí." },
+            { id: 40, category: "nodos", usuario: "tecnico", question: "Yo ya sé qué condiciones necesita cada etapa.", answer: "Y está perfecto, no lo cuestiono. Lo que pasa es que 'saber' y 'poder demostrar' son cosas diferentes. Si usted le dice al jefe 'la temperatura estaba mala', ¿qué le responde? Con el sensor le muestra los datos." },
+            { id: 41, category: "nodos", usuario: "tecnico", question: "Si tengo que estar pendiente de un sensor más, no termino.", answer: "No es un sensor más, es un respaldo. Usted no tiene que hacer nada con él, él solo mide y le avisa si algo está mal." },
+            { id: 42, category: "nodos", usuario: "tecnico", question: "¿Y cómo sé que los datos son reales?", answer: "Los sensores están calibrados de fábrica. Y además, usted puede compararlos con un termómetro normal. Si hay diferencia, los ajustamos." },
+            { id: 43, category: "nodos", usuario: "dueno", question: "El ambiente siempre ha sido así, no le meto plata a eso.", answer: "Y está bien, funcionó. Pero piénselo: si usted tiene 1.000 cerdos y la temperatura está dos grados más alta de lo que debería, ¿cuánto está perdiendo en comida? El sensor le muestra lo invisible." },
+            { id: 44, category: "nodos", usuario: "dueno", question: "¿Y qué voy a hacer con un sensor? Mis empleados no lo van a usar.", answer: "No necesitan usarlo, el sensor funciona solo. Lo que necesitan es recibir la alerta cuando algo está mal. Y eso se lo mandamos a quien usted quiera." },
+            { id: 45, category: "nodos", usuario: "dueno", question: "Son muchos sensores, ¿para qué?", answer: "Con dos o tres sensores alcanza para un galpón. No es mucho. Y se instalan en diez minutos: se cuelgan y ya." },
+            { id: 46, category: "nodos", usuario: "hijo", question: "¿Realmente hace falta? Yo creo que con lo que hay alcanza.", answer: "Mire, si sus cerdos están en un ambiente que no es óptimo, está perdiendo plata. No es que haga falta, es que está dejando de ganar." },
+            { id: 47, category: "nodos", usuario: "hijo", question: "¿Y eso cuánto cuesta?", answer: "Mucho menos de lo que pierde si no lo tiene. Una granja perdió 30 cerdos en una semana por un problema de ventilación que nadie detectó. Cuarenta millones de pérdida por no tener un sensor de 800 mil." },
+            { id: 48, category: "nodos", usuario: "lider", question: "El ambiente no es algo en lo que invierta normalmente.", answer: "Es que no es una inversión en ambiente, es una inversión en no perder plata. El ambiente afecta la conversión directamente." },
+            { id: 49, category: "nodos", usuario: "lider", question: "¿Cómo mido el retorno de un sensor?", answer: "Le pongo un ejemplo: si usted tiene 1.000 cerdos y la temperatura baja la conversión en un 5%, ¿cuánto pierde? El sensor le permite mantener las condiciones óptimas." },
+            { id: 50, category: "plataforma", usuario: "galponero", question: "Yo con el celular ya estoy bien, para qué tanto.", answer: "No tiene que aprender nada nuevo. Es como cuando pone todas sus apps de trabajo en una carpeta: todo está ahí, pero no tiene que aprender nada, solo abrir." },
+            { id: 51, category: "plataforma", usuario: "galponero", question: "Es que eso es para los que saben de números.", answer: "No, al contrario. Mientras más simple, mejor. La plataforma le confirma lo que usted ve. Todo le llega a usted, no tiene que andar preguntando." },
+            { id: 52, category: "plataforma", usuario: "tecnico", question: "Ya tengo muchos sistemas, no quiero otro más.", answer: "No es otro sistema, es el mismo pero integrado. En lugar de abrir cuatro programas, abre uno. En lugar de exportar datos de uno a otro, tiene todo junto." },
+            { id: 53, category: "plataforma", usuario: "tecnico", question: "¿Y cómo se integra con lo que tengo?", answer: "Tenemos API. Si ya tiene algo, lo conectamos. Y si no tiene nada, la plataforma ya le sirve. Es como tener un centro de comando." },
+            { id: 54, category: "plataforma", usuario: "dueno", question: "No tengo tiempo de meterme en un sistema.", answer: "No tiene que meterse, eso es lo bueno. Usted recibe los reportes, ve los indicadores importantes y ya. No tiene que configurar nada, no tiene que meter datos." },
+            { id: 55, category: "plataforma", usuario: "dueno", question: "¿Y qué pasa si no tengo internet?", answer: "Funciona offline también. Los datos se guardan local y cuando vuelva la conexión se sincroniza. No se pierde nada." },
+            { id: 56, category: "plataforma", usuario: "dueno", question: "¿Quién me enseña a usar eso?", answer: "Nosotros. Le damos una capacitación de 30 minutos y listo. Y si tiene dudas, tiene soporte. No lo dejamos solo." },
+            { id: 57, category: "plataforma", usuario: "hijo", question: "¿Y eso es difícil de manejar?", answer: "Es más fácil que Instagram. Tiene gráficos, colores, cosas claras. No tiene que ser técnico para usarlo." },
+            { id: 58, category: "plataforma", usuario: "hijo", question: "¿Le puedo dar acceso a mi papá para que vea?", answer: "Sí, claro. Cada persona tiene su usuario y sus permisos. Usted decide qué ve cada uno." },
+            { id: 59, category: "plataforma", usuario: "lider", question: "¿Se integra con mi sistema contable?", answer: "Tenemos API, así que lo conectamos a lo que tenga. Y si no tiene sistema, la plataforma le da los reportes que necesita." },
+            { id: 60, category: "plataforma", usuario: "lider", question: "¿Cómo sé que la tecnología está dando retorno?", answer: "La plataforma le muestra los indicadores clave. Cuánto pesan los cerdos, cuánto comen, cuánto le cuesta. Compara un mes con otro, un lote con otro." },
+            { id: 61, category: "general", usuario: "dueno", question: "Está muy caro", answer: "Entiendo. Una forma de verlo es así: si usted tiene 500 cerdos y no sabe exactamente cuándo pesar, puede estar alimentando 50 que ya deberían haber salido. Una semana de más son millones en comida. La cámara le evita eso." },
+            { id: 62, category: "general", usuario: "dueno", question: "Funciona sin problema", answer: "Me alegra que le vaya bien. Lo que le propongo es una prueba: en un solo galpón, con un lote, sin compromiso. Si no le sirve, no sigue. Pero si le sirve, va a preguntarse cómo vivía sin esto." },
+            { id: 63, category: "general", usuario: "galponero", question: "No tengo tiempo", answer: "Lo sé, el tiempo es lo que menos sobra. Y precisamente por eso se lo propongo: en lugar de pasar tiempo pesando, revisando silos, anotando, usted recupera ese tiempo. Es menos trabajo, no más." },
+            { id: 64, category: "general", usuario: "dueno", question: "Mi gente no lo va a usar", answer: "En las granjas donde lo hemos puesto, los galponeros lo aprenden en dos días. Y no tienen que hacer nada especial: la cámara pesa sola, el sensor mide solo." },
+            { id: 65, category: "general", usuario: "dueno", question: "Ya tengo un proveedor", answer: "Perfecto, entiendo. Lo que le propongo es que nos comparen. Vea lo que tiene y vea lo que le ofrezco. Si no es mejor, no hay razón a cambiar." },
+            { id: 66, category: "general", usuario: "galponero", question: "No entiendo de tecnología", answer: "No tiene que entender de tecnología. Nosotros lo instalamos, lo configuramos, y después usted solo mira. Es como un electrodoméstico: no necesita saber cómo funciona por dentro." }
+        ];
+
+        let viewedCards = new Set();
+        let currentCategory = 'all';
+
+        function getUsuarioLabel(usuario) {
+            const labels = { galponero: "Galponero", tecnico: "Técnico", dueno: "Dueño", hijo: "Hijo", lider: "Líder" };
+            return labels[usuario] || usuario;
+        }
+
+        function createCard(card) {
+            return `<div class="flip-card cursor-pointer perspective-1000 h-80" data-category="${card.category}" data-usuario="${card.usuario}" data-id="${card.id}" data-question="${card.question.toLowerCase()}" data-answer="${card.answer.toLowerCase()}" onclick="flipCard(this)">
+                <div class="card-inner relative w-full h-full transform-style-3d">
+                    <div class="card-front absolute inset-0 backface-hidden rounded-2xl p-5 card-glow flex flex-col">
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-2 py-0.5 rounded-full bg-[#97F4FF]/20 text-[#97F4FF] text-[10px] font-semibold uppercase">${card.category}</span>
+                            <span class="px-2 py-0.5 rounded-full bg-white/10 text-white/80 text-[10px] font-medium">${getUsuarioLabel(card.usuario)}</span>
+                        </div>
+                        <div class="flex-1 flex items-center justify-center"><p class="text-white font-heading font-semibold text-lg text-center leading-relaxed px-1">${card.question}</p></div>
+                        <div class="text-center mt-3"><span class="text-[#97F4FF]/70 text-xs flex items-center justify-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>Ver respuesta</span></div>
+                    </div>
+                    <div class="card-back absolute inset-0 backface-hidden rotate-y-180 rounded-2xl p-5 flex flex-col">
+                        <div class="flex items-center gap-2 mb-3"><span class="text-white font-semibold text-xs">Respuesta sugerida</span></div>
+                        <div class="flex-1 flex items-center overflow-hidden"><p class="text-white/90 text-sm leading-relaxed">${card.answer}</p></div>
+                        <div class="text-center mt-3 pt-3 border-t border-white/10"><span class="text-[#97F4FF] text-xs flex items-center justify-center gap-2"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Volver</span></div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function flipCard(element) {
+            element.classList.toggle('flipped');
+            const cardId = element.dataset.id;
+            if (!viewedCards.has(cardId)) { viewedCards.add(cardId); updateCounter(); }
+        }
+
+        function updateCounter() { document.getElementById('viewed-count').textContent = viewedCards.size; }
+
+        function filterCards(category) {
+            currentCategory = category;
+            const cards = document.querySelectorAll('.flip-card');
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            cards.forEach(card => {
+                const matchesCategory = category === 'all' || card.dataset.category === category;
+                const matchesSearch = searchTerm === '' || card.dataset.question.includes(searchTerm) || card.dataset.answer.includes(searchTerm);
+                card.style.display = (matchesCategory && matchesSearch) ? 'block' : 'none';
+            });
+        }
+
+        function init() {
+            document.getElementById('cards-container').innerHTML = cardsData.map(createCard).join('');
+            document.getElementById('total-count').textContent = cardsData.length;
+            document.getElementById('search-input').addEventListener('input', () => filterCards(currentCategory));
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(b => { b.classList.remove('active', 'bg-[#97F4FF]', 'text-[#040833]'); b.classList.add('glass', 'text-white'); });
+                    this.classList.add('active', 'bg-[#97F4FF]', 'text-[#040833]');
+                    this.classList.remove('glass', 'text-white');
+                    filterCards(this.dataset.category);
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
